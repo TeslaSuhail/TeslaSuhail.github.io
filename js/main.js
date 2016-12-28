@@ -1,21 +1,27 @@
-var i=0;
-function XYZ(){
-  var settings = {
-  "id": i,
-  "title" : "title",
-  "body" : "body",
-  "url": "http://jsonplaceholder.typicode.com/posts/",
-  "method": "GET"
+var i=1;
+function Extract()
+{
+  var settings =
+  {
+    "id": i,
+    "title" : "title",
+    "body" : "body",
+    "url": "http://jsonplaceholder.typicode.com/posts/"+i,
+    "method": "GET"
   };
-  $.ajax(settings).done(function (response) {
-  $("#metaInfo").append("ID: " + settings.id);
-  $("#listOfPeople").append(settings.title + settings.body);
-  console.log(response);
- });
+  $.ajax(settings).done(function (response)
+  {
+    $("#listOfPeople").prepend('<li class="collection-item avatar"> <i class="material-icons circle green">insert_chart</i><span class="title"><b>' +
+    response.title + '</b></span><p style="text-align:left;">' + response.body + ' </p></li>');
+    console.log(response);
+  });
+ i++;
+ if (i < 100)
+ {
+    Timer();
+ }
 }
-function Test(){
-    var delay=100000;
-  for( ; i<=100 ; i++){
-  setTimeout(XYZ(), delay);
-  }
+function Timer ()
+{
+   setTimeout(Extract, 1500); //in milli-seconds
 }
